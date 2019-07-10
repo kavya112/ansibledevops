@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: install snmp
+      apt: name=snmp update_cache=yes state=latest
+      notify:
+        - restart snmpd
+  handlers:
+    - name: restart snmpd
+      service: name=snmpd state=restarted
